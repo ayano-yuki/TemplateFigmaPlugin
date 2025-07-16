@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figma Stamp Plugin</title>
+  <style>
+    body { font-family: sans-serif; margin: 16px; }
+    #error { color: red; margin-top: 8px; }
+    #status { margin-top: 8px; color: #333; }
+    #coords { margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>丸いスタンプ</h2>
+  <button id="start">スタンプモード開始</button>
+  <button id="stop">スタンプモード終了</button>
+  <div id="coords">
+    <label>X: <input type="number" id="x" value="100" style="width:60px;"></label>
+    <label>Y: <input type="number" id="y" value="100" style="width:60px;"></label>
+    <button id="stamp">この座標に円を作成</button>
+  </div>
+  <div id="status"></div>
+  <div id="error"></div>
+  <script>
+    const startBtn = document.getElementById('start');
+    const stopBtn = document.getElementById('stop');
+    const stampBtn = document.getElementById('stamp');
+    const xInput = document.getElementById('x');
+    const yInput = document.getElementById('y');
+    const errorDiv = document.getElementById('error');
+    const statusDiv = document.getElementById('status');
+
+    startBtn.onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'start-stamp' } }, '*');
+      errorDiv.textContent = '';
+      statusDiv.textContent = 'スタンプモード中: 座標を指定して円を作成できます';
+    };
+    stopBtn.onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'stop-stamp' } }, '*');
+      errorDiv.textContent = '';
+      statusDiv.textContent = 'スタンプモード終了';
+    };
+    stampBtn.onclick = () => {
+      const x = Number(xInput.value);
+      const y = Number(yInput.value);
+      parent.postMessage({ pluginMessage: { type: 'create-stamp', x, y } }, '*');
+    };
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'error') {
+        errorDiv.textContent = `エラー: ${msg.message}`;
+      }
+      if (msg.type === 'status') {
+        statusDiv.textContent = msg.message;
+      }
+    };
+  </script>
+</body>
+</html> 
