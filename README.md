@@ -25,7 +25,8 @@
 
 ```sh
 npm install
-npx tsc
+cd figma
+npx tsc -p tsconfig.json
 ```
 
 1. 上記コマンドで依存をインストール＆ビルド

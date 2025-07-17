@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "webpack": "^5.0.0",
-    "ts-loader": "^9.0.0",
-    "@figma/plugin-typings": "^1.65.0"
+    "@figma/plugin-typings": "^1.115.0"
   }
 }
