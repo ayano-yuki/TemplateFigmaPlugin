@@ -1,5 +1,4 @@
 "use strict";
-/// <reference types="@figma/plugin-typings" />
 figma.showUI(__html__, { width: 320, height: 120 });
 figma.ui.onmessage = () => {
     try {
@@ -10,7 +9,7 @@ figma.ui.onmessage = () => {
         figma.currentPage.appendChild(ellipse);
         figma.currentPage.selection = [ellipse];
         figma.viewport.scrollAndZoomIntoView([ellipse]);
-        figma.ui.postMessage({ type: 'status', message: '(0, 0) に直径10の円を作成しました' });
+        figma.ui.postMessage({ type: 'status', message: '(0, 0) に直径100の円を作成しました' });
     }
     catch (error) {
         figma.ui.postMessage({ type: 'error', message: error.message || String(error) });

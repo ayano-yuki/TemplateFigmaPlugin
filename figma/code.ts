@@ -1,5 +1,3 @@
-/// <reference types="@figma/plugin-typings" />
-
 figma.showUI(__html__, { width: 320, height: 120 });
 
 figma.ui.onmessage = () => {
